@@ -13,7 +13,10 @@
 
 		<style>
 			/* 1. Reset and Base */
-			* { box-sizing: border-box; }
+			* {
+				box-sizing: border-box;
+			}
+
 			body {
 				font-family: Arial, sans-serif;
 				line-height: 1.6;
@@ -22,7 +25,10 @@
 				background-color: #f8f8f8;
 				color: #333;
 			}
-			main { padding: 20px 0; }
+
+			main {
+				padding: 20px 0;
+			}
 
 			/* 2. Layout & Containers */
 			.feltronics-content {
@@ -32,8 +38,14 @@
 				background-color: #fff;
 				box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 			}
-			article { padding: 20px 0; }
-			.step { margin-bottom: 40px; }
+
+			article {
+				padding: 20px 0;
+			}
+
+			.step {
+				margin-bottom: 40px;
+			}
 
 			/* 3. Typography and Structure */
 			h1.step-title, h2.step-title {
@@ -43,27 +55,63 @@
 				padding-bottom: 10px;
 				margin-bottom: 20px;
 			}
-			h1.step-title { font-size: 5em; text-align: center; }
-			h2.step-title { font-size: 1.8em; color: #007bff; }
-			.step-body p, .step-body ul, .step-body ol { margin-bottom: 15px; }
-			.sr-only {
-				position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-				overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;
+
+			h1.step-title {
+				font-size: 5em;
+				text-align: center;
 			}
-			.pull-right { float: right; font-weight: bold; font-size: 1.5rem}
-			.clearfix::after { content: ""; clear: both; display: table; }
+
+			h2.step-title {
+				font-size: 1.8em;
+				color: #007bff;
+			}
+
+			.step-body p, .step-body ul, .step-body ol {
+				margin-bottom: 15px;
+			}
+
+			.sr-only {
+				position: absolute;
+				width: 1px;
+				height: 1px;
+				padding: 0;
+				margin: -1px;
+				overflow: hidden;
+				clip: rect(0, 0, 0, 0);
+				border: 0;
+			}
+
+			.pull-right {
+				float: right;
+				font-weight: bold;
+				font-size: 1.5rem
+			}
+
+			.clearfix::after {
+				content: "";
+				clear: both;
+				display: table;
+			}
 
 			/* 4. Media/Photoset (Flexbox Grid) */
-			.photoset-wrapper { margin: 20px 0; }
+			.photoset-wrapper {
+				margin: 20px 0;
+			}
+
 			.photoset-row {
 				display: flex;
 				margin-bottom: 10px;
 				gap: 10px;
 			}
+
 			.photoset-item {
-				position: relative; overflow: hidden;
-				flex-grow: 1; flex-shrink: 1; min-width: 0;
+				position: relative;
+				overflow: hidden;
+				flex-grow: 1;
+				flex-shrink: 1;
+				min-width: 0;
 			}
+
 			.photoset-col {
 				display: flex;
 				flex-direction: column;
@@ -71,6 +119,7 @@
 				flex-grow: 1;
 				flex-shrink: 1;
 			}
+
 			.photoset-image img, .photoset-image video {
 				display: block;
 				width: 100%;
@@ -84,24 +133,60 @@
 				padding-top: 15px;
 				border-top: 1px dashed #ddd;
 			}
-			.list-unstyled, .unstyled { list-style: none; padding-left: 0; }
+
+			.list-unstyled, .unstyled {
+				list-style: none;
+				padding-left: 0;
+			}
+
 			.file-info {
-				display: flex; align-items: center; border: 1px solid #eee;
-				margin-bottom: 10px; padding: 10px; background-color: #f9f9f9;
+				display: flex;
+				align-items: center;
+				border: 1px solid #eee;
+				margin-bottom: 10px;
+				padding: 10px;
+				background-color: #f9f9f9;
 			}
+
 			.file-info a.thumb-wrapper {
-				display: flex; align-items: center; text-decoration: none; color: #333; flex-grow: 1;
+				display: flex;
+				align-items: center;
+				text-decoration: none;
+				color: #333;
+				flex-grow: 1;
 			}
-			.file-thumb { margin-right: 10px; }
-			.file-thumb img { width: 32px; height: auto; }
-			.file-actions { margin-left: 20px; }
+
+			.file-thumb {
+				margin-right: 10px;
+			}
+
+			.file-thumb img {
+				width: 32px;
+				height: auto;
+			}
+
+			.file-actions {
+				margin-left: 20px;
+			}
+
 			.btn {
-				display: inline-block; padding: 8px 12px; background-color: #0056b3;
-				color: #fff; text-decoration: none; border-radius: 4px;
-				font-size: 0.9em; transition: background-color 0.2s;
+				display: inline-block;
+				padding: 8px 12px;
+				background-color: #0056b3;
+				color: #fff;
+				text-decoration: none;
+				border-radius: 4px;
+				font-size: 0.9em;
+				transition: background-color 0.2s;
 			}
-			.btn:hover { background-color: #007bff; }
-			.hidden-row { display: none; }
+
+			.btn:hover {
+				background-color: #007bff;
+			}
+
+			.hidden-row {
+				display: none;
+			}
 
 			/* 6. Video Facade Styles */
 			/* Target the live iframe and the facade wrapper for sizing/centering */
@@ -114,6 +199,7 @@
 				margin-left: auto;
 				margin-right: auto;
 			}
+
 			/* Base style for the Facade Container (sets the aspect ratio box) */
 			.youtube-facade {
 				position: relative;
@@ -124,6 +210,7 @@
 				padding-bottom: 56.25%;
 				height: 0;
 			}
+
 			/* Play Button styling */
 			.youtube-facade .play-button {
 				position: absolute;
@@ -138,9 +225,11 @@
 				z-index: 10;
 				transition: transform 0.2s;
 			}
+
 			.youtube-facade .play-button:hover {
 				transform: translate(-50%, -50%) scale(1.1);
 			}
+
 			.youtube-facade .play-button::before {
 				content: '';
 				position: absolute;
@@ -211,17 +300,39 @@
 								<nav id="toc">
 									<h2>Table of Contents</h2>
 									<ul>
-										<li><a href="#step1">Step 1: Laser Cut the Pieces</a></li>
-										<li><a href="#step2">Step 2: Alternative to Laser Cutting</a></li>
-										<li><a href="#step3">Step 3: Tools</a></li>
-										<li><a href="#step4">Step 4: Parts List</a></li>
-										<li><a href="#step5">Step 5: Strip Wire Leads</a></li>
-										<li><a href="#step6">Step 6: Attach the Magnet to the Wire</a></li>
-										<li><a href="#step7">Step 7: Add Heat Shrink</a></li>
-										<li><a href="#step8">Step 8: Glue Schematic Symbol</a></li>
-										<li><a href="#step9">Step 9: Attach Spring Terminal</a></li>
-										<li><a href="#step10">Step 10: Final Assembly</a></li>
-										<li><a href="#step11">Step 11: Make a Circuit and Other Connector Ideas</a></li>
+										<li>
+											<a href="#step1">Step 1: Laser Cut the Pieces</a>
+										</li>
+										<li>
+											<a href="#step2">Step 2: Alternative to Laser Cutting</a>
+										</li>
+										<li>
+											<a href="#step3">Step 3: Tools</a>
+										</li>
+										<li>
+											<a href="#step4">Step 4: Parts List</a>
+										</li>
+										<li>
+											<a href="#step5">Step 5: Strip Wire Leads</a>
+										</li>
+										<li>
+											<a href="#step6">Step 6: Attach the Magnet to the Wire</a>
+										</li>
+										<li>
+											<a href="#step7">Step 7: Add Heat Shrink</a>
+										</li>
+										<li>
+											<a href="#step8">Step 8: Glue Schematic Symbol</a>
+										</li>
+										<li>
+											<a href="#step9">Step 9: Attach Spring Terminal</a>
+										</li>
+										<li>
+											<a href="#step10">Step 10: Final Assembly</a>
+										</li>
+										<li>
+											<a href="#step11">Step 11: Make a Circuit and Other Connector Ideas</a>
+										</li>
 									</ul>
 								</nav>
 								<div class="mediaset">
@@ -360,7 +471,8 @@
 								</div>
 							</section>
 
-							<section id="step1" class="step" data-stepid="SIZ7PNXHJ1XP6A9"><h2 class="step-title">Step 1: Laser Cut the Pieces</h2>
+							<section id="step1" class="step" data-stepid="SIZ7PNXHJ1XP6A9"><h2 class="step-title">Step
+								1: Laser Cut the Pieces</h2>
 								<div class="step-body">
 									Download the zip file containing the template cut files (vector graphics), choose
 									the format for your Laser Cutter, and cut the following for a simple
@@ -398,7 +510,8 @@
 								</div>
 							</section>
 
-							<section id="step2" class="step" data-stepid="SUO74AJHJ1XP6B1"><h2 class="step-title">Step 2: Alternative to Laser Cutting</h2>
+							<section id="step2" class="step" data-stepid="SUO74AJHJ1XP6B1"><h2 class="step-title">Step
+								2: Alternative to Laser Cutting</h2>
 								<div class="step-body">
 									<em>Not everyone has a laser -</em>
 									<em>We briefly were able to borrow a laser to cut some pieces, and it made a huge
@@ -441,7 +554,8 @@
 								</div>
 							</section>
 
-							<section id="step3" class="step" data-stepid="SLXZED3HIYWEJDW"><h2 class="step-title">Step 3: Tools</h2>
+							<section id="step3" class="step" data-stepid="SLXZED3HIYWEJDW"><h2 class="step-title">Step
+								3: Tools</h2>
 								<div class="mediaset">
 									<div class="photoset-wrapper">
 										<div class="photoset" style="max-width: 1042px;">
@@ -449,7 +563,7 @@
 												<div class="photoset-item photoset-cell" style="flex: 1.4897119341563787;">
 													<div class="photoset-image">
 														<a class="gallery-link" rel="photoset98" href="images/FB7OHXIHJ1XP53N.webp">
-															<img loading="lazy" alt="Tools" src="images/FB7OHXIHJ1XP53N.webp" height="624" width="930" >
+															<img loading="lazy" alt="Tools" src="images/FB7OHXIHJ1XP53N.webp" height="624" width="930">
 															<i class="notes-icon"></i>
 														</a>
 													</div>
@@ -474,7 +588,8 @@
 								</div>
 							</section>
 
-							<section id="step4" class="step" data-stepid="SI87OTPHIYWEJDZ"><h2 class="step-title">Step 4: Parts List</h2>
+							<section id="step4" class="step" data-stepid="SI87OTPHIYWEJDZ"><h2 class="step-title">Step
+								4: Parts List</h2>
 								<div class="mediaset">
 									<div class="photoset-wrapper">
 										<div class="photoset">
@@ -503,15 +618,35 @@
 								<div class="step-body">
 									<p>The materials required to build a basic Feltronics component are:</p>
 									<ul>
-										<li><strong>Black and White Felt</strong> (Laser Cut using these Templates - we recommend using a Laser Cutter)</li>
-										<li><strong>24 g Stranded wire</strong></li>
-										<li><strong>3/16" Heat shrink</strong></li>
-										<li><strong>10 mm x 3 mm Ring Magnets</strong></li>
-										<li><strong>Springs</strong></li>
-										<li><strong>LED</strong> (or substitute your desired component)</li>
-										<li><strong>1 Coin Batteries &amp; Holder</strong></li>
-										<li><strong>Momentary Button Switch</strong></li>
-										<li><strong>100 Ohm Resistor</strong></li>
+										<li>
+											<strong>Black and White Felt</strong>
+											(Laser Cut using these Templates - we recommend using a Laser Cutter)
+										</li>
+										<li>
+											<strong>24 g Stranded wire</strong>
+										</li>
+										<li>
+											<strong>3/16" Heat shrink</strong>
+										</li>
+										<li>
+											<strong>10 mm x 3 mm Ring Magnets</strong>
+										</li>
+										<li>
+											<strong>Springs</strong>
+										</li>
+										<li>
+											<strong>LED</strong>
+											(or substitute your desired component)
+										</li>
+										<li>
+											<strong>1 Coin Batteries &amp; Holder</strong>
+										</li>
+										<li>
+											<strong>Momentary Button Switch</strong>
+										</li>
+										<li>
+											<strong>100 Ohm Resistor</strong>
+										</li>
 									</ul>
 									<p>The PDF template files are attached, so you can cut the templates by hand with
 										scissors or on your laser (highly recommended). Most of the parts can be found
@@ -530,14 +665,15 @@
 										</a>
 										and others. Felt is readily available for your local fabric store, but don't
 										get the little rectangles, buy the yard, it is far more economical.
-										If you shop carefully, the cost per part should be less than $1</p>
+										If you shop carefully, the cost per part should be less than $1
+									</p>
 								</div>
 
 								<div class="downloads"><h3 class="sr-only">Attachments</h3>
 									<ul class="ible-files unstyled list-unstyled">
 										<li class="file-info clearfix">
 											<a class="thumb-wrapper" href="./downloads/FAJPK1UHJ1XP5C2.pdf" download="feltronics_antenna.pdf">
-                                                      <span class="file-thumb"><img class="tiny-img ls-is-cached lazyloaded" src="images/attachment-PDF.webp" alt="download" height="100" width="100"></span>
+												<span class="file-thumb"><img class="tiny-img ls-is-cached lazyloaded" src="images/attachment-PDF.webp" alt="download" height="100" width="100"></span>
 												<span class="title">feltronics_antenna.pdf</span></a>
 											<div class="file-actions">
 												<a href="./downloads/FAJPK1UHJ1XP5C2.pdf" download="feltronics_antenna.pdf" class="btn pull-right">
@@ -559,7 +695,8 @@
 								</div>
 							</section>
 
-							<section id="step5" class="step" data-stepid="S40CHHHHIZD4EX2"><h2 class="step-title">Step 5: Strip Wire Leads</h2>
+							<section id="step5" class="step" data-stepid="S40CHHHHIZD4EX2"><h2 class="step-title">Step
+								5: Strip Wire Leads</h2>
 								<div class="mediaset">
 									<div class="photoset-wrapper">
 										<div class="photoset" style="max-width: 1132px;">
@@ -585,13 +722,22 @@
 								</div>
 								<div class="step-body">
 									<ol>
-										<li>Cut a single piece of 24 gauge <strong>stranded wire</strong> approximately 8 inches in length.</li>
-										<li>Strip 3 inches of insulation off one end, exposing about an inch of bare wire. We recommend leaving the extra insulation on the wire as this will provide extra <strong>structural support</strong>.</li>
+										<li>Cut a single piece of 24 gauge
+											<strong>stranded wire</strong>
+											approximately 8 inches in length.
+										</li>
+										<li>Strip 3 inches of insulation off one end, exposing about an inch of bare
+											wire. We recommend leaving the extra insulation on the wire as this will
+											provide extra
+											<strong>structural support</strong>
+											.
+										</li>
 									</ol>
 								</div>
 							</section>
 
-							<section id="step6" class="step" data-stepid="SF5AMV0HIZDAZAX"><h2 class="step-title">Step 6: Attach the Magnet to the Wire</h2>
+							<section id="step6" class="step" data-stepid="SF5AMV0HIZDAZAX"><h2 class="step-title">Step
+								6: Attach the Magnet to the Wire</h2>
 								<div class="mediaset">
 									<div class="photoset-wrapper">
 										<div class="photoset">
@@ -633,15 +779,31 @@
 									</div>
 									<div class="step-body">
 										<ol>
-											<li>Thread one of the <strong>ring magnets</strong> onto the stripped portion of the <strong>wire</strong>.</li>
-											<li>Wrap the <strong>wire</strong> around the <strong>magnet</strong> and thread it through two more times.</li>
-											<li>Finish with the <strong>wire</strong> running back parallel to itself and cut off the extra inch of <strong>wire sheathing</strong>.</li>
+											<li>Thread one of the
+												<strong>ring magnets</strong>
+												onto the stripped portion of the
+												<strong>wire</strong>
+												.
+											</li>
+											<li>Wrap the
+												<strong>wire</strong>
+												around the
+												<strong>magnet</strong>
+												and thread it through two more times.
+											</li>
+											<li>Finish with the
+												<strong>wire</strong>
+												running back parallel to itself and cut off the extra inch of
+												<strong>wire sheathing</strong>
+												.
+											</li>
 										</ol>
 									</div>
 								</div>
 							</section>
 
-							<section id="step7" class="step" data-stepid="S2R6OZMHIZDAZCI"><h2 class="step-title">Step 7: Add Heat Shrink</h2>
+							<section id="step7" class="step" data-stepid="S2R6OZMHIZDAZCI"><h2 class="step-title">Step
+								7: Add Heat Shrink</h2>
 								<div class="mediaset">
 									<div class="photoset-wrapper">
 										<div class="photoset">
@@ -668,14 +830,27 @@
 								</div>
 								<div class="step-body">
 									<ol>
-										<li>Slide 2 inches of 3/16" <strong>heat shrink tubing</strong> over the long and short wire ends.</li>
-										<li>Heat the wire with a <strong>hot air gun, soldering iron, or even the tip of a hot glue gun</strong>.</li>
-										<li>Be careful not to heat up the <strong>Magnet</strong>!! The magnet will be <strong>degaussed</strong> if it gets too hot.</li>
+										<li>Slide 2 inches of 3/16"
+											<strong>heat shrink tubing</strong>
+											over the long and short wire ends.
+										</li>
+										<li>Heat the wire with a
+											<strong>hot air gun, soldering iron, or even the tip of a hot glue gun
+											</strong>
+											.
+										</li>
+										<li>Be careful not to heat up the
+											<strong>Magnet</strong>
+											!! The magnet will be
+											<strong>degaussed</strong>
+											if it gets too hot.
+										</li>
 									</ol>
 								</div>
 							</section>
 
-							<section id="step8" class="step" data-stepid="S4CB2VXHIZDAZHC"><h2 class="step-title">Step 8: Glue Schematic Symbol</h2>
+							<section id="step8" class="step" data-stepid="S4CB2VXHIZDAZHC"><h2 class="step-title">Step
+								8: Glue Schematic Symbol</h2>
 								<div class="mediaset">
 									<div class="photoset-wrapper">
 										<div class="photoset">
@@ -702,16 +877,28 @@
 								</div>
 								<div class="step-body">
 									<ol>
-										<li>Apply hot glue to the <strong>feltronics schematic symbol</strong></li>
-										<li>Avoid putting glue into the laser cut <strong>holes for the wires</strong></li>
-										<li>Flip the symbol over and onto the <strong>white felt piece</strong></li>
-										<li>Line up the <strong>wire holes</strong> in the top layer (octogon)</li>
-										<li>Avoid smushing glue into the laser cut <strong>holes for the wires</strong></li>
+										<li>Apply hot glue to the
+											<strong>feltronics schematic symbol</strong>
+										</li>
+										<li>Avoid putting glue into the laser cut
+											<strong>holes for the wires</strong>
+										</li>
+										<li>Flip the symbol over and onto the
+											<strong>white felt piece</strong>
+										</li>
+										<li>Line up the
+											<strong>wire holes</strong>
+											in the top layer (octogon)
+										</li>
+										<li>Avoid smushing glue into the laser cut
+											<strong>holes for the wires</strong>
+										</li>
 									</ol>
 								</div>
 							</section>
 
-							<section id="step9" class="step" data-stepid="S4P6B1VHJ1XP5YC"><h2 class="step-title">Step 9: Attach Spring Terminal</h2>
+							<section id="step9" class="step" data-stepid="S4P6B1VHJ1XP5YC"><h2 class="step-title">Step
+								9: Attach Spring Terminal</h2>
 								<div class="mediaset">
 									<div class="photoset-wrapper">
 										<div class="photoset">
@@ -747,15 +934,32 @@
 								</div>
 								<div class="step-body">
 									<ol>
-										<li>Strip 3/4 inch of insulation off the other end of the <strong>Wire</strong> and insert the wire through the top felt piece.</li>
-										<li>Bend the <strong>spring</strong> in half so the end loops are next to each other.</li>
-										<li>Thread the stripped <strong>wire</strong> through the <strong>spring loops</strong>.</li>
-										<li>Bend the <strong>wire</strong> and twist it around itself to hold the <strong>springs</strong>.</li>
+										<li>Strip 3/4 inch of insulation off the other end of the
+											<strong>Wire</strong>
+											and insert the wire through the top felt piece.
+										</li>
+										<li>Bend the
+											<strong>spring</strong>
+											in half so the end loops are next to each other.
+										</li>
+										<li>Thread the stripped
+											<strong>wire</strong>
+											through the
+											<strong>spring loops</strong>
+											.
+										</li>
+										<li>Bend the
+											<strong>wire</strong>
+											and twist it around itself to hold the
+											<strong>springs</strong>
+											.
+										</li>
 									</ol>
 								</div>
 							</section>
 
-							<section id="step10" class="step" data-stepid="SKBQNQYHJ1XP61C"><h2 class="step-title">Step 10: Final Assembly</h2>
+							<section id="step10" class="step" data-stepid="SKBQNQYHJ1XP61C"><h2 class="step-title">Step
+								10: Final Assembly</h2>
 								<div class="mediaset">
 									<div class="photoset-wrapper">
 										<div class="photoset">
@@ -793,14 +997,19 @@
 										<ol>
 											<li>Apply additional hot glue to the back of the white inner layer.</li>
 											<li>Flip it over and center on the black outer layer.</li>
-											<li>Flip it once more and Iron from the Bottom - this will ensure the top of the piece is flat.</li>
-											<li>Insert your LED by squeezing the spring and jabbing the lead in (and out).</li>
+											<li>Flip it once more and Iron from the Bottom - this will ensure the top of
+												the piece is flat.
+											</li>
+											<li>Insert your LED by squeezing the spring and jabbing the lead in (and
+												out).
+											</li>
 										</ol>
 									</div>
 								</div>
 							</section>
 
-							<section id="step11" class="step" data-stepid="SNBQD2OHJ1XP6L7"><h2 class="step-title">Step 11: Make a Circuit and Other Connector Ideas</h2>
+							<section id="step11" class="step" data-stepid="SNBQD2OHJ1XP6L7"><h2 class="step-title">Step
+								11: Make a Circuit and Other Connector Ideas</h2>
 								<div class="mediaset">
 									<div class="photoset-wrapper">
 										<div class="photoset" style="max-width: 992px;">
@@ -834,14 +1043,19 @@
 									</div>
 								</div>
 								<div class="step-body">
-									<p>You can make circuits big and small, simple or complex with Feltronics. All you have to do is make more pieces for your electronics project kit, and you're on your way. If there is a new schematic symbol that isn't in your kit, just cut one out.</p>
+									<p>You can make circuits big and small, simple or complex with Feltronics. All you
+										have to do is make more pieces for your electronics project kit, and you're on
+										your way. If there is a new schematic symbol that isn't in your kit, just cut
+										one out.</p>
 
 									<h3>Example Circuits</h3>
 									<p>A few of the circuits we've made so far:</p>
 									<ul>
 										<li>Simple series circuits (analog 'AND' logic)</li>
 										<li>Simple parallel circuits (analog 'OR' logic)</li>
-										<li>Complex series and parallel circuits (AND with OR in various configurations)</li>
+										<li>Complex series and parallel circuits (AND with OR in various
+											configurations)
+										</li>
 										<li>AM Radio (with only five components!!)</li>
 										<li>FM Radio (with a few more)</li>
 										<li>Flip Flops (a-stable multivibrator)</li>
@@ -851,21 +1065,33 @@
 									</ul>
 
 									<h3>Alternative Connector Ideas</h3>
-									<p>We have also evolved our manufacturing process over time. Presented here are several iterations and possibilities for connecting the components:</p>
+									<p>We have also evolved our manufacturing process over time. Presented here are
+										several iterations and possibilities for connecting the components:</p>
 									<ul>
-										<li>Magnets in the middle of parts for connectors with washers on component leads</li>
-										<li>Magnets in the middle of parts for connectors with magnets on component leads</li>
-										<li>Magnets in the middle of parts for connectors with component leads sandwiched between magnets</li>
+										<li>Magnets in the middle of parts for connectors with washers on component
+											leads
+										</li>
+										<li>Magnets in the middle of parts for connectors with magnets on component
+											leads
+										</li>
+										<li>Magnets in the middle of parts for connectors with component leads
+											sandwiched between magnets
+										</li>
 										<li>Washers in the middle with magnets on component leads</li>
 										<li>Sockets in the middle with components plugged in</li>
 										<li>Alligator clips in the middle holding onto component leads</li>
 										<li>Foil tape (HVAC tape) wrapped [regular] magnets</li>
-										<li>Springs in the middle with component leads poking through (as used in this instructable)</li>
-										<li>Header type connector on the side of the Feltronics piece with components sticking in (for mass production if we ever get a laser - hint, hint)</li>
+										<li>Springs in the middle with component leads poking through (as used in this
+											instructable)
+										</li>
+										<li>Header type connector on the side of the Feltronics piece with components
+											sticking in (for mass production if we ever get a laser - hint, hint)
+										</li>
 										<li>And surely a few others that I've forgotten.</li>
 									</ul>
 
-									<p>Please share your designs and ideas with others. We'll post more schematics and templates just as soon as we clean them up.</p>
+									<p>Please share your designs and ideas with others. We'll post more schematics and
+										templates just as soon as we clean them up.</p>
 								</div>
 							</section>
 						</div>
