@@ -36,7 +36,7 @@ This clean design ensures the guide is preserved and universally accessible.
 
 ## ➡️ Access the Full Guide
 
-The complete step-by-step assembly instructions, parts list, and connector ideas are located in the primary file of this repository.
+The complete step-by-step assembly instructions, part list, and connector ideas are located in the primary file of this repository.
 
 1. Clone this repository to your local computer.
 
