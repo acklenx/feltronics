@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Feltronics</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="Feltronics turns your refrigerator into a soft circuit breadboard (a large format electronics project kit). You can make real working electronic circuits and projects using big fuzzy felt pieces, and stick them to metal surfaces.">
+		<link rel="shortcut icon" type="image/x-icon" href="./images/favicon/favicon.ico">
+		<link rel="apple-touch-icon" href="./images/favicon/apple-touch-icon.png">
+		<link rel="apple-touch-icon" sizes="192x192" href="./images/favicon/apple-touch-icon-192x192.png">
+		<link rel="apple-touch-icon" sizes="512x512" href="./images/favicon/apple-touch-icon-512x512.png">
+		<link rel="preload" fetchpriority="high" as="image" href="images/F1GY0B0HJ369P3B.webp" type="image/webp">
+
+		<style>
+			/* 1. Reset and Base */
+			* { box-sizing: border-box; }
+			body {
+				font-family: Arial, sans-serif;
+				line-height: 1.6;
+				margin: 0;
+				padding: 0;
+				background-color: #f8f8f8;
+				color: #333;
+			}
+			main { padding: 20px 0; }
+
+			/* 2. Layout & Containers */
+			.feltronics-content {
+				max-width: 960px;
+				margin: 0 auto;
+				padding: 0 15px;
+				background-color: #fff;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			}
+			article { padding: 20px 0; }
+			.step { margin-bottom: 40px; }
+
+			/* 3. Typography and Structure */
+			h1.step-title, h2.step-title {
+				margin-top: 0;
+				padding-top: 20px;
+				border-bottom: 2px solid #ccc;
+				padding-bottom: 10px;
+				margin-bottom: 20px;
+			}
+			h1.step-title { font-size: 5em; text-align: center; }
+			h2.step-title { font-size: 1.8em; color: #007bff; }
+			.step-body p, .step-body ul, .step-body ol { margin-bottom: 15px; }
+			.sr-only {
+				position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+				overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;
+			}
+			.pull-right { float: right; font-weight: bold; font-size: 1.5rem}
+			.clearfix::after { content: ""; clear: both; display: table; }
+
+			/* 4. Media/Photoset (Flexbox Grid) */
+			.photoset-wrapper { margin: 20px 0; }
+			.photoset-row {
+				display: flex;
+				margin-bottom: 10px;
+				gap: 10px;
+			}
+			.photoset-item {
+				position: relative; overflow: hidden;
+				flex-grow: 1; flex-shrink: 1; min-width: 0;
+			}
+			.photoset-col {
+				display: flex;
+				flex-direction: column;
+				gap: 10px;
+				flex-grow: 1;
+				flex-shrink: 1;
+			}
+			.photoset-image img, .photoset-image video {
+				display: block;
+				width: 100%;
+				height: auto;
+				object-fit: cover;
+			}
+
+			/* 5. Downloads/Buttons */
+			.downloads {
+				margin-top: 30px;
+				padding-top: 15px;
+				border-top: 1px dashed #ddd;
+			}
+			.list-unstyled, .unstyled { list-style: none; padding-left: 0; }
+			.file-info {
+				display: flex; align-items: center; border: 1px solid #eee;
+				margin-bottom: 10px; padding: 10px; background-color: #f9f9f9;
+			}
+			.file-info a.thumb-wrapper {
+				display: flex; align-items: center; text-decoration: none; color: #333; flex-grow: 1;
+			}
+			.file-thumb { margin-right: 10px; }
+			.file-thumb img { width: 32px; height: auto; }
+			.file-actions { margin-left: 20px; }
+			.btn {
+				display: inline-block; padding: 8px 12px; background-color: #0056b3;
+				color: #fff; text-decoration: none; border-radius: 4px;
+				font-size: 0.9em; transition: background-color 0.2s;
+			}
+			.btn:hover { background-color: #007bff; }
+			.hidden-row { display: none; }
+
+			/* 6. Video Facade Styles */
+			/* Target the live iframe and the facade wrapper for sizing/centering */
+			.youtube-facade,
+			.step-body p > iframe,
+			.step-body > div > iframe {
+				max-width: 560px;
+				height: 315px;
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			/* Base style for the Facade Container (sets the aspect ratio box) */
+			.youtube-facade {
+				position: relative;
+				cursor: pointer;
+				background-size: cover;
+				background-position: center;
+				width: 100%;
+				padding-bottom: 56.25%;
+				height: 0;
+			}
+			/* Play Button styling */
+			.youtube-facade .play-button {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				width: 68px;
+				height: 48px;
+				background: #ff0000;
+				border: none;
+				border-radius: 12px / 48px;
+				z-index: 10;
+				transition: transform 0.2s;
+			}
+			.youtube-facade .play-button:hover {
+				transform: translate(-50%, -50%) scale(1.1);
+			}
+			.youtube-facade .play-button::before {
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				border-style: solid;
+				border-width: 10px 0 10px 18px;
+				border-color: transparent transparent transparent #ffffff;
+			}
+
+			/* END Video Facade Styles */
+
+			/* Utility to hide rows that are hidden in the original HTML (e.g., hidden-row) */
+			.hidden-row {
+				display: none;
+			}
+
+			/* TOC Styling */
+			#toc {
+				border: 1px solid #ddd;
+				padding: 15px;
+				margin: 20px auto 30px auto;
+				background-color: #f9f9f9;
+				max-width: 600px; /* Constrain width to look good below the title */
+			}
+
+			#toc h2 {
+				font-size: 1.5em;
+				color: #333;
+				border-bottom: 1px solid #ccc;
+				padding-bottom: 8px;
+				margin-bottom: 10px;
+				padding-top: 0; /* Override step-title padding */
+			}
+
+			#toc ul {
+				list-style: none; /* Remove bullet points */
+				padding-left: 0;
+				margin-bottom: 0;
+			}
+
+			#toc li {
+				margin-bottom: 5px;
+			}
+
+			#toc a {
+				text-decoration: none;
+				color: #007bff;
+				font-size: 0.95em;
+			}
+
+			#toc a:hover {
+				text-decoration: underline;
+				color: #0056b3;
+			}
+		</style>
+
+	</head>
+	<body>
+		<main>
+			<div class="feltronics">
+				<div class="feltronics-content">
+					<article id="article" class="full-wrapper category-content-circuits">
+						<div class="article-body">
+							<section id="intro" class="step">
+								<h1 class="step-title">Feltronics</h1>
+								<nav id="toc">
+									<h2>Table of Contents</h2>
+									<ul>
+										<li><a href="#step1">Step 1: Laser Cut the Pieces</a></li>
+										<li><a href="#step2">Step 2: Alternative to Laser Cutting</a></li>
+										<li><a href="#step3">Step 3: Tools</a></li>
+										<li><a href="#step4">Step 4: Parts List</a></li>
+										<li><a href="#step5">Step 5: Strip Wire Leads</a></li>
+										<li><a href="#step6">Step 6: Attach the Magnet to the Wire</a></li>
+										<li><a href="#step7">Step 7: Add Heat Shrink</a></li>
+										<li><a href="#step8">Step 8: Glue Schematic Symbol</a></li>
+										<li><a href="#step9">Step 9: Attach Spring Terminal</a></li>
+										<li><a href="#step10">Step 10: Final Assembly</a></li>
+										<li><a href="#step11">Step 11: Make a Circuit and Other Connector Ideas</a></li>
+									</ul>
+								</nav>
+								<div class="mediaset">
+									<div class="photoset-wrapper">
+										<div class="photoset" style="max-width: 922px;">
+											<div class="photoset-row items-4 ">
+												<div class="photoset-item photoset-cell" style="flex: 0.96;">
+													<div class="photoset-image">
+														<a class="gallery-link" rel="photoset86" href="./images/fullsize/F1GY0B0HJ369P3B.webp">
+															<img alt="Feltronics" src="images/F1GY0B0HJ369P3B.webp" height="700" width="675">
+															<i class="notes-icon"></i>
+														</a>
+													</div>
+												</div>
+												<div class="photoset-col" style="flex:0.34;">
+													<div class="photoset-item photoset-cell">
+														<div class="photoset-image">
+															<a class="gallery-link" rel="photoset86" href="./images/fullsize/FG8AZY8HJ369P1K.webp">
+																<img loading="lazy" alt="Feltronics" src="images/FG8AZY8HJ369P1K.webp" height="166" width="247">
+															</a>
+														</div>
+													</div>
+													<div class="photoset-item photoset-cell tall-video-container">
+														<div class="photoset-image">
+															<video class="gif-video" controls="" autoplay="" muted="" loop="loop" playsinline="" id="waf_detected_video4" data-wat-video-found="true"
+																   style="width: 100%; height: 100%; object-fit: contain;">
+																<source src="./images/animated/F5E97G4HJ369LFB.mp4" type="video/mp4">
+															</video>
+														</div>
+													</div>
+													<div class="photoset-item photoset-cell">
+														<div class="photoset-image">
+															<video class="gif-video" controls="" autoplay="" muted="" loop="loop" playsinline="" id="waf_detected_video5" data-wat-video-found="true">
+																<source src="./images/animated/FVWLLWCHJ369LG3.mp4" type="video/mp4">
+															</video>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="photoset-row items-3  hidden-row">
+												<div class="photoset-item photoset-cell" style="flex: 0.944;">
+													<div class="photoset-image">
+														<video class="gif-video" controls="" autoplay="" muted="" loop="" playsinline="" id="waf_detected_video6" data-wat-video-found="true">
+															<source src="./images/animated/FJCSNP2HJ369LDX.mp4" type="video/mp4">
+														</video>
+													</div>
+												</div>
+												<div class="photoset-item photoset-cell" style="flex: 1.4897119341563787;">
+													<div class="photoset-image">
+														<a class="gallery-link" rel="photoset86" href="./images/fullsize/FR30YMAHJ369P1O.webp">
+															<img loading="lazy" alt="Feltronics" src="images/FR30YMAHJ369P1O.webp">
+														</a>
+													</div>
+												</div>
+												<div class="photoset-item photoset-cell" style="flex: 1.333941605839416;">
+													<div class="photoset-image">
+														<a class="gallery-link" rel="photoset86" href="./images/fullsize/FR99I0GHJ39R9Z8.webp">
+															<img loading="lazy" alt="Feltronics" src="images/FR99I0GHJ39R9Z8.webp">
+														</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="step-body">
+									<p>Feltronics turns your refrigerator into a soft circuit breadboard (a large-format
+										electronics project kit). That is, you can make real, working electronic
+										circuits and projects using big fuzzy felt pieces and stick them to metal
+										surfaces. Hackerspace Charlotte took home the Grand Prize from the Global
+										Hackerspace Challenge with this project in 2011. Here we present
+										an easy method for creating your own Feltronics set...</p>
+
+									<p>This video is from a
+										<a href="https://www.meetup.com/Skookum-Tech-Talks/" rel="nofollow noopener noreferrer">
+											Tech Talk
+										</a>
+										given at
+										<a href="https://skookum.com/" rel="nofollow noopener noreferrer">Skookum</a>
+										. It uses Feltronics to demonstrate the electronics in a simple radio:
+									</p>
+									<div style="max-height: 315px; aspect-ratio: 16 / 9; overflow: hidden">
+										<div
+												class="youtube-facade"
+												data-embed-id="6EmIM2rrde4"
+												data-params="?autoplay=1&amp;start=780"
+												style="background-image: url('images/6EmIM2rrde4_thumb.webp');"
+												title="Play Video: How to Assemble a Basic Radio Transmitter">
+											<button class="play-button" aria-label="Play video"></button>
+										</div>
+									</div>
+
+									<p>
+										These two videos demonstrate basic electronics to kids at the Discovery Place, a
+										children's science museum in Charlotte, NC. We armed the kids with lasers and
+										asked them to point out the path of electricity.
+									</p>
+									<div style="max-height: 315px; aspect-ratio: 16 / 9; overflow: hidden">
+										<div
+												class="youtube-facade"
+												data-embed-id="ynGjo35SNvE"
+												data-params="?autoplay=1"
+												style="background-image: url('images/ynGjo35SNvE_thumb.webp');"
+												title="Play Video: Feltronics at Discovery Place">
+											<button class="play-button" aria-label="Play video"></button>
+										</div>
+									</div>
+
+									<p>Discovery Place 2</p>
+									<div style="max-height: 315px; aspect-ratio: 16 / 9; overflow: hidden">
+										<div
+												class="youtube-facade"
+												data-embed-id="i2Hw0rJs-UE"
+												data-params="?autoplay=1"
+												style="background-image: url('images/i2Hw0rJs-UE_thumb.webp');"
+												title="Play Video: Feltronics Radio at Discovery Place">
+											<button class="play-button" aria-label="Play video"></button>
+										</div>
+									</div>
+
+									<p>
+										This video shows an early demonstration of Feltronics at the 2011 Atlanta Mini
+										Maker Faire. You can see the [not quite finished] RGB LED mixer circuit at 2
+										minutes and 4 seconds in (sorry, deep linking doesn't seem to work).
+									</p>
+									<div style="max-height: 315px; aspect-ratio: 16 / 9; overflow: hidden">
+										<div
+												class="youtube-facade"
+												data-embed-id="IbxCRADx-bY"
+												data-params="?autoplay=1&amp;start=125"
+												style="background-image: url('images/IbxCRADx-bY_thumb.webp');"
+												title="Play Video: Feltronics at the Atlanta (Georgia Tech) Mini Maker Faire">
+											<button class="play-button" aria-label="Play video"></button>
+										</div>
+									</div>
+								</div>
+							</section>
+
+							<section id="step1" class="step" data-stepid="SIZ7PNXHJ1XP6A9"><h2 class="step-title">Step 1: Laser Cut the Pieces</h2>
+								<div class="step-body">
+									Download the zip file containing the template cut files (vector graphics), choose
+									the format for your Laser Cutter, and cut the following for a simple
+									series circuit:
+									Black Felt:
+									<ul>
+										<li> 4 x Outer Layers</li>
+										<li> 1 x Battery Schematic Symbol</li>
+										<li> 1 x Resistor Schematic Symbol</li>
+										<li> 1 x Button Switch Schematic Symbol</li>
+										<li> 1 x LED (Diode) Schematic Symbol</li>
+									</ul>
+									White Felt:
+									<ul>
+										<li> 4 x Inner Layers.</li>
+									</ul>
+									We have cut out a zillion felt parts, and can say without a doubt a laser is the way
+									to go. You can cut the parts with scissors, but it's the single most time-consuming
+									step.
+								</div>
+								<div class="downloads"><h3 class="sr-only">Attachments</h3>
+									<ul class="ible-files unstyled list-unstyled">
+										<li class="file-info clearfix">
+											<a class="thumb-wrapper" href="./downloads/FR6BOZBHJ1XP6BY.zip">
+												<span class="file-thumb"><img class="tiny-img ls-is-cached lazyloaded" src="./images/fileDownload.webp" alt="download"></span>
+												<span class="title">Schematic Symbols for Diode &amp; Battery</span>
+											</a>
+											<div class="file-actions">
+												<a href="./downloads/FR6BOZBHJ1XP6BY.zip" class="btn pull-right">
+													Download
+												</a>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</section>
+
+							<section id="step2" class="step" data-stepid="SUO74AJHJ1XP6B1"><h2 class="step-title">Step 2: Alternative to Laser Cutting</h2>
+								<div class="step-body">
+									<em>Not everyone has a laser -</em>
+									<em>We briefly were able to borrow a laser to cut some pieces, and it made a huge
+										difference in the quality and speed that we were able to create parts.
+									</em>
+									If you don't have a laser, you will need to first print the templates and cut them
+									out of paper and then use those paper templates to trace the pattern on to felt to
+									cut, or just hold the templates over the while you cut. Either way, after you
+									do that once, you'll know just how much having a laser means to us.
+									Download the zip file, choose the format for your
+									Laser Cutter, and cut the following:
+									Black Felt:
+									<ul>
+										<li> 4 x Outer Layers</li>
+										<li> 1 x Battery Schematic Symbol</li>
+										<li> 1 x Resistor Schematic Symbol</li>
+										<li> 1 x Button Switch Schematic Symbol</li>
+										<li> 1 x LED (Diode) Schematic Symbol</li>
+									</ul>
+									White Felt:
+									<ul>
+										<li> 4 x Inner Layers</li>
+									</ul>
+									\
+								</div>
+								<div class="downloads"><h3 class="sr-only">Attachments</h3>
+									<ul class="ible-files unstyled list-unstyled">
+										<li class="file-info clearfix">
+											<a class="thumb-wrapper" href="./downloads/FXST8ISHJ1XP6DC.zip">
+												<span class="file-thumb"><img class="tiny-img ls-is-cached lazyloaded" src="./images/fileDownload.webp" alt="download"></span>
+												<span class="title">Schematic Symbols for Diode &amp; Battery</span>
+											</a>
+											<div class="file-actions">
+												<a href="./downloads/FXST8ISHJ1XP6DC.zip" class="btn pull-right">
+													Download
+												</a>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</section>
+
+							<section id="step3" class="step" data-stepid="SLXZED3HIYWEJDW"><h2 class="step-title">Step 3: Tools</h2>
+								<div class="mediaset">
+									<div class="photoset-wrapper">
+										<div class="photoset" style="max-width: 1042px;">
+											<div class="photoset-row items-1 ">
+												<div class="photoset-item photoset-cell" style="flex: 1.4897119341563787;">
+													<div class="photoset-image">
+														<a class="gallery-link" rel="photoset98" href="images/FB7OHXIHJ1XP53N.webp">
+															<img loading="lazy" alt="Tools" src="images/FB7OHXIHJ1XP53N.webp">
+															<i class="notes-icon"></i>
+														</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="step-body">
+									<strong>1.</strong>
+									A Laser Cutter
+									<strong>2.</strong>
+									If you don't have a Laser cutter - a Pair of Scissors* (note: this
+									is not as good as a laser)
+									<strong>3.</strong>
+									Wire Strippers.
+									<strong>4.</strong>
+									Heat Gun (also not shown, but we have one) - may use a Hair Dryer - (look under the
+									bathroom sink)
+									<strong>5.</strong>
+									Glue Gun
+								</div>
+							</section>
+
+							<section id="step4" class="step" data-stepid="SI87OTPHIYWEJDZ"><h2 class="step-title">Step 4: Parts List</h2>
+								<div class="mediaset">
+									<div class="photoset-wrapper">
+										<div class="photoset">
+											<div class="photoset-row items-2 ">
+												<div class="photoset-item photoset-cell" style="flex: 1.4897119341563787;">
+													<div class="photoset-image">
+														<a class="gallery-link" rel="photoset101" href="./images/fullsize/FJ5W9LTHJ1XP53O.webp">
+															<img loading="lazy" alt="Parts List" src="images/FJ5W9LTHJ1XP53O.webp">
+															<i class="notes-icon"></i>
+														</a>
+													</div>
+												</div>
+												<div class="photoset-item photoset-cell" style="flex: 1.0447368421052632;">
+													<div class="photoset-image">
+														<a class="gallery-link" rel="photoset101" href="images/FSMOFMWHJ39PBRJ.webp">
+															<img loading="lazy" alt="Parts List" src="images/FSMOFMWHJ39PBRJ.webp">
+															<i class="notes-icon"></i>
+														</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="step-body">
+									<p>The materials required to build a basic Feltronics component are:</p>
+									<ul>
+										<li><strong>Black and White Felt</strong> (Laser Cut using these Templates - we recommend using a Laser Cutter)</li>
+										<li><strong>24 g Stranded wire</strong></li>
+										<li><strong>3/16" Heat shrink</strong></li>
+										<li><strong>10 mm x 3 mm Ring Magnets</strong></li>
+										<li><strong>Springs</strong></li>
+										<li><strong>LED</strong> (or substitute your desired component)</li>
+										<li><strong>1 Coin Batteries &amp; Holder</strong></li>
+										<li><strong>Momentary Button Switch</strong></li>
+										<li><strong>100 Ohm Resistor</strong></li>
+									</ul>
+									<p>The PDF template files are attached, so you can cut the templates by hand with
+										scissors or on your laser (highly recommended). Most of the parts can be found
+										on eBay such as the
+										<a href="https://www.ebay.com/sch/Business-Industrial-/12576/i.html?_from=R40&amp;_nkw=Extension+Springs+-+Stainless" rel="nofollow noopener noreferrer">
+											Extension Springs - Stainless
+										</a>
+										. Other parts like the ring magnets can be found with reasonable prices on sites
+										like
+										<a href="https://www.kjmagnetics.com/" rel="nofollow noopener noreferrer">K&amp;J
+											Magnetics
+										</a>
+										or
+										<a href="https://www.supermagnetman.net/" rel="nofollow noopener noreferrer">
+											Super Magnet Man
+										</a>
+										and others. Felt is readily available for your local fabric store, but don't
+										get the little rectangles, buy the yard, it is far more economical.
+										If you shop carefully, the cost per part should be less than $1</p>
+								</div>
+
+								<div class="downloads"><h3 class="sr-only">Attachments</h3>
+									<ul class="ible-files unstyled list-unstyled">
+										<li class="file-info clearfix">
+											<a class="thumb-wrapper" href="./downloads/FAJPK1UHJ1XP5C2.pdf" download="feltronics_antenna.pdf">
+                                                      <span class="file-thumb"><img class="tiny-img ls-is-cached lazyloaded" src="images/attachment-PDF.webp" alt="download">
+                                                      </span>
+												<span class="title">feltronics_antenna.pdf</span></a>
+											<div class="file-actions">
+												<a href="./downloads/FAJPK1UHJ1XP5C2.pdf" download="feltronics_antenna.pdf" class="btn pull-right">
+													Download
+												</a>
+											</div>
+										</li>
+										<li class="file-info clearfix">
+											<a class="thumb-wrapper" href="./downloads/F669UMRHJ1XP5C3.pdf">
+												<span class="file-thumb"><img class="tiny-img ls-is-cached lazyloaded" src="images/attachment-PDF.webp" alt="download"></span>
+												<span class="title">Feltronics Antenna Outside Template</span></a>
+											<div class="file-actions">
+												<a href="./downloads/F669UMRHJ1XP5C3.pdf" download="feltronics_antennaOutsideTemplate.pdf" class="btn pull-right">
+													Download
+												</a>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</section>
+
+							<section id="step5" class="step" data-stepid="S40CHHHHIZD4EX2"><h2 class="step-title">Step 5: Strip Wire Leads</h2>
+								<div class="mediaset">
+									<div class="photoset-wrapper">
+										<div class="photoset" style="max-width: 1132px;">
+											<div class="photoset-row items-2 ">
+												<div class="photoset-item photoset-cell" style="flex: 0.9464285714285714;">
+													<div class="photoset-image">
+														<a class="gallery-link" rel="photoset105" href="./images/fullsize/FSHCL9CHJ39PBQL.webp">
+															<img loading="lazy" alt="Strip Wire Leads" src="images/FSHCL9CHJ39PBQL.webp">
+															<i class="notes-icon"></i>
+														</a>
+													</div>
+												</div>
+												<div class="photoset-item photoset-cell" style="flex: 0.6712707182320442;">
+													<div class="photoset-image">
+														<a class="gallery-link" rel="photoset105" href="./images/fullsize/FU7BWSDHJ1XP5RJ.webp">
+															<img loading="lazy" alt="Strip Wire Leads" src="images/FU7BWSDHJ1XP5RJ.webp">
+														</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="step-body">
+									<ol>
+										<li>Cut a single piece of 24 gauge <strong>stranded wire</strong> approximately 8 inches in length.</li>
+										<li>Strip 3 inches of insulation off one end, exposing about an inch of bare wire. We recommend leaving the extra insulation on the wire as this will provide extra <strong>structural support</strong>.</li>
+									</ol>
+								</div>
+							</section>
+
+							<section id="step6" class="step" data-stepid="SF5AMV0HIZDAZAX"><h2 class="step-title">Step 6: Attach the Magnet to the Wire</h2>
+								<div class="mediaset">
+									<div class="photoset-wrapper">
+										<div class="photoset">
+											<div class="photoset-row items-4 ">
+												<div class="photoset-item photoset-cell" style="flex: 1.5028901734104045;">
+													<div class="photoset-image">
+														<a class="gallery-link" rel="photoset109" href="images/FJ5TKUPHJ1XP5XF.webp">
+															<img loading="lazy" alt="Attach the Magnet to the Wire" src="images/FJ5TKUPHJ1XP5XF.webp">
+															<i class="notes-icon"></i>
+														</a>
+													</div>
+												</div>
+												<div class="photoset-col" style="flex:0.45777930915898507;">
+													<div class="photoset-item photoset-cell" style="flex: 1.2423312883435582;">
+														<div class="photoset-image">
+															<a class="gallery-link" rel="photoset109" href="./images/fullsize/FZ8LRVVHJ1XP5T0.webp">
+																<img loading="lazy" alt="Attach the Magnet to the Wire" src="images/FZ8LRVVHJ1XP5T0.webp">
+															</a>
+														</div>
+													</div>
+													<div class="photoset-item photoset-cell" style="flex: 1.5;">
+														<div class="photoset-image">
+															<a class="gallery-link" rel="photoset109" href="./images/fullsize/F278EKGHJ1XP5T1.webp">
+																<img loading="lazy" alt="Attach the Magnet to the Wire" src="images/F278EKGHJ1XP5T1.webp">
+															</a>
+														</div>
+													</div>
+													<div class="photoset-item photoset-cell" style="flex: 1.4028122415219189;">
+														<div class="photoset-image">
+															<a class="gallery-link" rel="photoset109" href="./images/fullsize/F07V0VMHJ1XP5T2.webp">
+																<img loading="lazy" alt="Attach the Magnet to the Wire" src="images/F07V0VMHJ1XP5T2.webp">
+																<i class="notes-icon"></i>
+															</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="step-body">
+										<ol>
+											<li>Thread one of the <strong>ring magnets</strong> onto the stripped portion of the <strong>wire</strong>.</li>
+											<li>Wrap the <strong>wire</strong> around the <strong>magnet</strong> and thread it through two more times.</li>
+											<li>Finish with the <strong>wire</strong> running back parallel to itself and cut off the extra inch of <strong>wire sheathing</strong>.</li>
+										</ol>
+									</div>
+								</div>
+							</section>
+
+							<section id="step7" class="step" data-stepid="S2R6OZMHIZDAZCI"><h2 class="step-title">Step 7: Add Heat Shrink</h2>
+								<div class="mediaset">
+									<div class="photoset-wrapper">
+										<div class="photoset">
+											<div class="photoset-row items-2 ">
+												<div class="photoset-item photoset-cell" style="flex: 1.4897119341563787;">
+													<div class="photoset-image">
+														<a class="gallery-link" rel="photoset115" href="./images/fullsize/F3DUJ94HJ1XP5UC.webp">
+															<img loading="lazy" alt="Add Heat Shrink" src="images/F3DUJ94HJ1XP5UC.webp">
+															<i class="notes-icon"></i>
+														</a>
+													</div>
+												</div>
+												<div class="photoset-item photoset-cell" style="flex: 1.4897119341563787;">
+													<div class="photoset-image">
+														<a class="gallery-link" rel="photoset115" href="./images/fullsize/FBLE8QXHJ1XP5UB.webp">
+															<img loading="lazy" alt="Add Heat Shrink" src="images/FBLE8QXHJ1XP5UB.webp">
+															<i class="notes-icon"></i>
+														</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="step-body">
+									<ol>
+										<li>Slide 2 inches of 3/16" <strong>heat shrink tubing</strong> over the long and short wire ends.</li>
+										<li>Heat the wire with a <strong>hot air gun, soldering iron, or even the tip of a hot glue gun</strong>.</li>
+										<li>Be careful not to heat up the <strong>Magnet</strong>!! The magnet will be <strong>degaussed</strong> if it gets too hot.</li>
+									</ol>
+								</div>
+							</section>
+
+							<section id="step8" class="step" data-stepid="S4CB2VXHIZDAZHC"><h2 class="step-title">Step 8: Glue Schematic Symbol</h2>
+								<div class="mediaset">
+									<div class="photoset-wrapper">
+										<div class="photoset">
+											<div class="photoset-row items-2 ">
+												<div class="photoset-item photoset-cell" style="flex: 1.5;">
+													<div class="photoset-image">
+														<a class="gallery-link" rel="photoset119" href="./images/fullsize/FFI4K58HJ1XP5X3.webp">
+															<img loading="lazy" alt="Glue Schematic Symbol" src="images/FFI4K58HJ1XP5X3.webp">
+															<i class="notes-icon"></i>
+														</a>
+													</div>
+												</div>
+												<div class="photoset-item photoset-cell" style="flex: 1.5;">
+													<div class="photoset-image">
+														<a class="gallery-link" rel="photoset119" href="./images/fullsize/F7NFK81HJ1XP5X2.webp">
+															<img loading="lazy" alt="Glue Schematic Symbol" src="images/F7NFK81HJ1XP5X2.webp">
+															<i class="notes-icon"></i>
+														</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="step-body">
+									<ol>
+										<li>Apply hot glue to the <strong>feltronics schematic symbol</strong></li>
+										<li>Avoid putting glue into the laser cut <strong>holes for the wires</strong></li>
+										<li>Flip the symbol over and onto the <strong>white felt piece</strong></li>
+										<li>Line up the <strong>wire holes</strong> in the top layer (octogon)</li>
+										<li>Avoid smushing glue into the laser cut <strong>holes for the wires</strong></li>
+									</ol>
+								</div>
+							</section>
+
+							<section id="step9" class="step" data-stepid="S4P6B1VHJ1XP5YC"><h2 class="step-title">Step 9: Attach Spring Terminal</h2>
+								<div class="mediaset">
+									<div class="photoset-wrapper">
+										<div class="photoset">
+											<div class="photoset-row items-3 ">
+												<div class="photoset-item photoset-cell" style="flex: 1.3494809688581315;">
+													<div class="photoset-image">
+														<a class="gallery-link" rel="photoset123" href="./images/fullsize/FQRQGBUHJ39PCZQ.webp">
+															<img loading="lazy" alt="Attach Spring Terminal" src="images/FQRQGBUHJ39PCZQ.webp">
+															<i class="notes-icon"></i>
+														</a>
+													</div>
+												</div>
+												<div class="photoset-col" style="flex:0.6811670104048386;">
+													<div class="photoset-item photoset-cell" style="flex: 1.2550231839258115;">
+														<div class="photoset-image">
+															<a class="gallery-link" rel="photoset123" href="./images/fullsize/FMRDGGDHJ1XP60F.webp">
+																<img loading="lazy" alt="Attach Spring Terminal" src="images/FMRDGGDHJ1XP60F.webp">
+																<i class="notes-icon"></i>
+															</a>
+														</div>
+													</div>
+													<div class="photoset-item photoset-cell" style="flex: 1.4897119341563787;">
+														<div class="photoset-image">
+															<a class="gallery-link" rel="photoset123" href="./images/fullsize/FEM2MZCHJ1XP5YN.webp">
+																<img loading="lazy" alt="Attach Spring Terminal" src="images/FEM2MZCHJ1XP5YN.webp">
+															</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="step-body">
+									<ol>
+										<li>Strip 3/4 inch of insulation off the other end of the <strong>Wire</strong> and insert the wire through the top felt piece.</li>
+										<li>Bend the <strong>spring</strong> in half so the end loops are next to each other.</li>
+										<li>Thread the stripped <strong>wire</strong> through the <strong>spring loops</strong>.</li>
+										<li>Bend the <strong>wire</strong> and twist it around itself to hold the <strong>springs</strong>.</li>
+									</ol>
+								</div>
+							</section>
+
+							<section id="step10" class="step" data-stepid="SKBQNQYHJ1XP61C"><h2 class="step-title">Step 10: Final Assembly</h2>
+								<div class="mediaset">
+									<div class="photoset-wrapper">
+										<div class="photoset">
+											<div class="photoset-row items-3 ">
+												<div class="photoset-item photoset-cell" style="flex: 1.4897119341563787;">
+													<div class="photoset-image">
+														<a class="gallery-link" rel="photoset128" href="./images/fullsize/F0R64YFHJ1XP61K.webp">
+															<img loading="lazy" alt="Final Assembly" src="images/F0R64YFHJ1XP61K.webp">
+															<i class="notes-icon"></i>
+														</a>
+													</div>
+												</div>
+												<div class="photoset-col" style="flex:0.6213292889196798;">
+													<div class="photoset-item photoset-cell" style="flex: 1.065891472868217;">
+														<div class="photoset-image">
+															<a class="gallery-link" rel="photoset128" href="./images/fullsize/FKGA5H7HJ1XP61Y.webp">
+																<img loading="lazy" alt="Final Assembly" src="images/FKGA5H7HJ1XP61Y.webp">
+																<i class="notes-icon"></i>
+															</a>
+														</div>
+													</div>
+													<div class="photoset-item photoset-cell" style="flex: 1.4897119341563787;">
+														<div class="photoset-image">
+															<a class="gallery-link" rel="photoset128" href="./images/fullsize/FGHCH1WHJ1XP61N.webp">
+																<img loading="lazy" alt="Final Assembly" src="images/FGHCH1WHJ1XP61N.webp">
+																<i class="notes-icon"></i>
+															</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="step-body">
+										<ol>
+											<li>Apply additional hot glue to the back of the white inner layer.</li>
+											<li>Flip it over and center on the black outer layer.</li>
+											<li>Flip it once more and Iron from the Bottom - this will ensure the top of the piece is flat.</li>
+											<li>Insert your LED by squeezing the spring and jabbing the lead in (and out).</li>
+										</ol>
+									</div>
+								</div>
+							</section>
+
+							<section id="step11" class="step" data-stepid="SNBQD2OHJ1XP6L7"><h2 class="step-title">Step 11: Make a Circuit and Other Connector Ideas</h2>
+								<div class="mediaset">
+									<div class="photoset-wrapper">
+										<div class="photoset" style="max-width: 992px;">
+											<div class="photoset-row items-3 ">
+												<div class="photoset-item photoset-cell" style="flex: 0.9637722829212191;">
+													<div class="photoset-image">
+														<a class="gallery-link" rel="photoset136" href="./images/fullsize/F1GY0B0HJ369P3B.webp">
+															<img loading="lazy" alt="Make a Circuit" src="images/F1GY0B0HJ369P3B.webp">
+															<i class="notes-icon"></i>
+														</a>
+													</div>
+												</div>
+												<div class="photoset-col" style="flex:0.45353759322717196;">
+													<div class="photoset-item photoset-cell" style="flex: 1.3966480446927374;">
+														<div class="photoset-image">
+															<a class="gallery-link" rel="photoset136" href="./images/fullsize/FD8W1BWHJ1XP6N2.webp">
+																<img loading="lazy" alt="Make a Circuit" src="images/FD8W1BWHJ1XP6N2.webp">
+															</a>
+														</div>
+													</div>
+													<div class="photoset-item photoset-cell" style="flex: 0.6716417910447762;">
+														<div class="photoset-image">
+															<video class="gif-video" controls="" autoplay="" muted="" loop="" playsinline="" id="waf_detected_video7" data-wat-video-found="true">
+																<source src="./images/animated/F5E97G4HJ369LFB.mp4" type="video/mp4">
+															</video>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="step-body">
+									<p>You can make circuits big and small, simple or complex with Feltronics. All you have to do is make more pieces for your electronics project kit, and you're on your way. If there is a new schematic symbol that isn't in your kit, just cut one out.</p>
+
+									<h3>Example Circuits</h3>
+									<p>A few of the circuits we've made so far:</p>
+									<ul>
+										<li>Simple series circuits (analog 'AND' logic)</li>
+										<li>Simple parallel circuits (analog 'OR' logic)</li>
+										<li>Complex series and parallel circuits (AND with OR in various configurations)</li>
+										<li>AM Radio (with only 5 components!!)</li>
+										<li>FM Radio (with a few more)</li>
+										<li>Flip Flops (a-stable multivibrator)</li>
+										<li>Analog Multi-meter (Analog to Digital to Servo Control) with an Arduino</li>
+										<li>RGB LED mixer</li>
+										<li>And endless more</li>
+									</ul>
+
+									<h3>Alternative Connector Ideas</h3>
+									<p>We have also evolved our manufacturing process over time. Presented here are several iterations and possibilities for connecting the components:</p>
+									<ul>
+										<li>Magnets in the middle of parts for connectors with washers on component leads</li>
+										<li>Magnets in the middle of parts for connectors with magnets on component leads</li>
+										<li>Magnets in the middle of parts for connectors with component leads sandwiched between magnets</li>
+										<li>Washers in the middle with magnets on component leads</li>
+										<li>Sockets in the middle with components plugged in</li>
+										<li>Alligator clips in the middle holding onto component leads</li>
+										<li>Foil tape (HVAC tape) wrapped [regular] magnets</li>
+										<li>Springs in the middle with component leads poking through (as used in this instructable)</li>
+										<li>Header type connector on the side of the Feltronics piece with components sticking in (for mass production if we ever get a laser - hint, hint)</li>
+										<li>And surely a few others that I've forgotten.</li>
+									</ul>
+
+									<p>Please share your designs and ideas with others. We'll post more schematics and templates just as soon as we clean them up.</p>
+								</div>
+							</section>
+						</div>
+					</article>
+				</div>
+			</div>
+		</main>
+		<script>
+			document.addEventListener( 'DOMContentLoaded', function()
+			{
+				let facades = document.querySelectorAll( '.youtube-facade' );
+				facades.forEach( function( facade )
+				{
+					facade.addEventListener( 'click', function()
+					{
+						let embedId = this.dataset.embedId;
+						let params = this.dataset.params || '';
+						let iframe = document.createElement( 'iframe' );
+
+						iframe.setAttribute( 'width', '560' );
+						iframe.setAttribute( 'height', '315' );
+						iframe.setAttribute( 'src', 'https://www.youtube.com/embed/' + embedId + params );
+						iframe.setAttribute( 'frameborder', '0' );
+						iframe.setAttribute( 'allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' );
+						iframe.setAttribute( 'allowfullscreen', 'true' );
+						iframe.setAttribute( 'title', this.title.replace( 'Play Video: ', '' ) );
+
+						this.parentNode.parentNode.replaceChild( iframe, this.parentNode );
+					} );
+				} );
+			} );
+		</script>
+	</body>
+</html>
